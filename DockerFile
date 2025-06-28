@@ -1,28 +1,26 @@
-### Dockerfile for .NET 9 Web API (Multi-stage Build)
-```dockerfile
+# Dockerfile for .NET 9 Web API (Multi-stage Build)
+
 # Stage 1: Build
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
-# Copy project files and restore dependencies
-COPY *.sln .
-COPY YourProjectFolder/*.csproj ./YourProjectFolder/
-RUN dotnet restore
+# Copia el csproj y restaura
+COPY ["minicore-comiciones.csproj", "./"]
+RUN dotnet restore "minicore-comiciones.csproj"
 
-# Copy rest of source code and publish
+# Copia el resto del código y publica
 COPY . .
-WORKDIR /src/YourProjectFolder
-RUN dotnet publish -c Release -o /app/publish
+RUN dotnet publish "minicore-comiciones.csproj" -c Release -o /app/publish
 
 # Stage 2: Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 WORKDIR /app
 
-# Copy published output
+# Copia los artefactos publicados
 COPY --from=build /app/publish .
 
-# Expose port (the port your API listens on)
+# Expone el puerto 80 para HTTP
 EXPOSE 80
 
-# Entry point: replace YourProject.dll with your actual DLL name
-ENTRYPOINT ["dotnet", "YourProjectFolder.dll"]
+# Arranca la aplicación
+ENTRYPOINT ["dotnet", "minicore-comiciones.dll"]
