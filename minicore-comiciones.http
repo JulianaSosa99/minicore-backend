@@ -1,0 +1,6 @@
+@minicore_comiciones_HostAddress = http://localhost:5023
+
+GET {{minicore_comiciones_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

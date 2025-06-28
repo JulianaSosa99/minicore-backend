@@ -1,0 +1,21 @@
+# ------------------------------------
+# Node & Angular
+node_modules/
+dist/
+out-tsc/
+.angular/
+
+# Environment files
+src/environments/*.ts
+
+# .NET build output
+bin/
+obj/
+
+# ASP.NET Core secrets
+secrets.json
+
+# Configuration files
+appsettings.json
+appsettings.*.json
+ 
