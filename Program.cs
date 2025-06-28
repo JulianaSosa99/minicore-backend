@@ -34,9 +34,10 @@ builder.Services.AddCors(options =>
           .AllowAnyHeader()
     );
 });
+ 
 
 var app = builder.Build();
-
+app.UseDeveloperExceptionPage();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
